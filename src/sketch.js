@@ -1,6 +1,7 @@
 let z = 0;
 let i = 10;
 let surprise = false;
+let slothS = 0.1;
 function setup() {
   // These lines are fitting our canvas
   // where we want in the DOM
@@ -21,6 +22,7 @@ function draw() {
   // start fish animation
   if (surprise) {
     z = z + 1;
+    slothS += 0.001;
   }
   //end fish animation
   if (z > 1500) {
@@ -70,6 +72,7 @@ function drawBackground() {
   pop();
   push();
   fill(21, 102, 7);
+  drawSloth(100, 325, slothS);
   noStroke();
   triangle(0, 325, 20, 325, 5, 325);
   triangle(0 + i, 325, 10 + i, 325, 5 + i, 300);
@@ -138,5 +141,57 @@ function drawShip() {
   stroke(255);
   strokeWeight(3);
   triangle(288, 236, 295, 258, 271, 255);
+  pop();
+}
+
+function drawSloth(x, y, s) {
+  push();
+  //rotate(r);
+  translate(x, y);
+  scale(s);
+  //push();
+  fill("#6D7347");
+  //right shoulder
+  ellipse(30, -65, 30, 50);
+  //right hand nails
+  fill(212, 197, 195);
+  ellipse(75, -55, 15, 5);
+  ellipse(75, -50, 15, 5);
+  ellipse(75, -45, 15, 5);
+  fill("#6D7347");
+  //right arm
+  ellipse(40, -50, 70, 30);
+  fill(250, 233, 230, 98);
+  //hand
+  circle(63, -50, 15);
+  fill("#6D7347");
+  //body
+  ellipse(0, -50, 80, 100);
+  //left hand nails
+  fill(212, 197, 195);
+  ellipse(-25, -7, 5, 15);
+  ellipse(-30, -7, 5, 15);
+  ellipse(-35, -7, 5, 15);
+  fill("#6D7347");
+  //left arm
+  ellipse(-30, -50, 40, 80);
+  //leg
+  ellipse(30, -15, 70, 40);
+  //head
+  ellipse(0, -125, 85, 65);
+  //eye ring
+  fill(85, 85, 85);
+  ellipse(20, -125, 30, 20);
+  ellipse(-20, -125, 30, 20);
+  fill(50, 50, 50, 200);
+  //eyes
+  circle(-17, -125, 13);
+  circle(17, -125, 13);
+  //nose
+  triangle(-5, -115, 5, -115, 0, -110);
+  fill(0, 0, 0, 0);
+  //mouth
+  arc(0, -110, 25, 25, 0, PI);
+  //pop();
   pop();
 }
