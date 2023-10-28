@@ -2,6 +2,9 @@ let z = 0;
 let i = 10;
 let surprise = false;
 let slothS = 0.1;
+let shipX = 0;
+let shipY = 0;
+let shipR = 1;
 function setup() {
   // These lines are fitting our canvas
   // where we want in the DOM
@@ -14,7 +17,7 @@ function setup() {
 function draw() {
   //draw background and 4 fish
   drawBackground();
-  drawShip();
+  drawShip(shipX, shipR);
   drawFish(40, 40, z, color(101, 186, 84));
   drawFish(0 - 75, 75, z - 375, color(100, 0, 100));
   drawFish(0 - 75, 75, z - 375 - 375, color(100, 0, 0));
@@ -27,6 +30,8 @@ function draw() {
   //end fish animation
   if (z > 1500) {
     surprise = false;
+    shipR = shipR - 0.005;
+    shipX = shipX - 0.02;
   }
 }
 function drawFish(x, y, z, f) {
@@ -65,6 +70,7 @@ function drawFish(x, y, z, f) {
   pop();
 }
 function drawBackground() {
+  push();
   push();
   background(13, 20, 230);
   fill(230, 282, 74);
@@ -115,32 +121,32 @@ function drawBackground() {
   ellipse(63, 283, 10);
   ellipse(42, 242, 10);
   pop();
+  pop();
 }
 function mouseClicked() {
   if (mouseX < 100 && mouseX > 40 && mouseY < 75 && mouseY > 40) {
     surprise = true;
   }
 }
-function drawShip() {
+function drawShip(x, s) {
+  push();
+  scale(s);
   push();
   fill(79, 53, 5);
   strokeWeight(5);
-  line(300, 280, 288, 236);
+  line(300 + x, 280, 288 + x, 236);
   pop();
   push();
   fill(79, 53, 5);
   noStroke();
-  arc(300, 280, 100, 100, (11.5 * PI) / 6, (5.5 * PI) / 6);
-  pop();
-  push();
-  fill(230, 282, 74);
-  rect(0, 325, 400);
+  arc(300 + x, 280, 100 + x, 100, (11.5 * PI) / 6, (5.5 * PI) / 6);
   pop();
   push();
   fill(255, 255, 255);
   stroke(255);
   strokeWeight(3);
-  triangle(288, 236, 295, 258, 271, 255);
+  triangle(288 + x, 236, 295 + x, 258, 271 + x, 255);
+  pop();
   pop();
 }
 
